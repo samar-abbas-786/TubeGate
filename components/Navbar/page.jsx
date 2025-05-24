@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="sticky top-0 z-50 h-16 flex items-center justify-between px-6 md:px-12 backdrop-blur-md bg-black border-b border-purple-900/30 shadow-lg">
+    <nav className="sticky top-0 z-50 h-16 flex items-center justify-between px-6 md:px-12 backdrop-blur-md bg-black border-b border-purple-900/30 shadow-purple-500 shadow-xs">
       {/* Logo with glow effect */}
       <Link href="/" className="flex items-center gap-2 group">
         <SiSharex

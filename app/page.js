@@ -1,9 +1,11 @@
-import React from "react";
-
+import Hero from "@components/Hero/page";
+import Navbar from "@components/Navbar/page";
 const Home = () => {
   return (
     <div>
-      <h1 className="text-4xl text-red-400"></h1>
+      <Navbar />
+
+      <Hero />
     </div>
   );
 };
