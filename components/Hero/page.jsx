@@ -12,7 +12,7 @@ const Hero = () => {
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Headline with YouTube branding */}
-        <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="flex items-center justify-center items-center gap-3 mb-6">
           <FaYoutube className="text-red-500 text-4xl md:text-5xl" />
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 to-white bg-clip-text text-transparent">
             Content Approval <span className="text-white">Made Easy</span>
