@@ -26,7 +26,7 @@ const Navbar = () => {
         <ul className="hidden md:flex space-x-6 md:space-x-8">
           <li>
             <Link
-              href="/register"
+              href="/Register"
               className="relative text-white/90 hover:text-white transition-all duration-300 text-sm md:text-base font-medium"
             >
               <span className="relative group">
@@ -37,7 +37,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/login"
+              href="/Login"
               className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-purple-800 text-white hover:from-purple-700 hover:to-purple-900 transition-all duration-300 shadow-lg hover:shadow-purple-500/20 font-medium text-sm md:text-base"
             >
               Login
