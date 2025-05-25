@@ -20,8 +20,7 @@ export async function GET(request) {
     const { tokens } = await oauth2Client.getToken(code);
     console.log("Tokens:", tokens);
 
-    // Optionally, save tokens to DB or cookie
-    return NextResponse.json(tokens); // You will see JSON response on screen
+    return NextResponse.json(tokens); 
   } catch (error) {
     console.error("OAuth Error:", error);
     return NextResponse.json(
