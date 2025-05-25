@@ -61,7 +61,7 @@ const Navbar = () => {
               </li>
             </>
           ) : (
-            <>
+            <div className="flex items-center gap-5">
               <li>
                 <Link
                   href="/Dashboard"
@@ -73,12 +73,12 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-all duration-300 shadow-lg font-medium text-sm md:text-base"
+                  className="px-4 py-2 rounded-lg text-red-400 hover:text-red-700  transition-all duration-300 shadow-lg font-medium text-sm md:text-base"
                 >
                   Logout
                 </button>
               </li>
-            </>
+            </div>
           )}
         </ul>
 
@@ -120,28 +120,24 @@ const Navbar = () => {
               </li>
             </>
           ) : (
-            <>
-              <li>
-                <Link
-                  href="/Dashboard"
-                  className="text-2xl text-white/90 hover:text-purple-400 transition-all duration-300 font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setIsOpen(false);
-                  }}
-                  className="px-8 py-3 text-xl rounded-lg bg-red-600 hover:bg-red-700 text-white transition-all duration-300 shadow-lg font-medium"
-                >
-                  Logout
-                </button>
-              </li>
-            </>
+            <div className="flex flex-col gap-5">
+              <Link
+                href="/Dashboard"
+                className="text-2xl text-white/90  hover:text-purple-400 transition-all duration-300 font-medium"
+                onClick={() => setIsOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+                className="px-6 py-2 text-lg rounded-lg  text-red-400 hover:text-red-700 transition-all duration-300 shadow-lg font-medium"
+              >
+                Logout
+              </button>
+            </div>
           )}
         </ul>
       </div>
