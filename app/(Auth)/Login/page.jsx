@@ -26,6 +26,7 @@ const LoginPage = () => {
 
       if (response.status === 200) {
         console.log("user", response.data);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         router.push("/");
       } else {
         router.push("/Login");
@@ -70,19 +71,6 @@ const LoginPage = () => {
               required
             />
           </div>
-
-          {/* <div>
-            <label className="block text-gray-300 mb-2">Account Type</label>
-            <select
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full bg-black border border-purple-900/50 rounded-lg px-4 py-3 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none transition appearance-none"
-              required
-            >
-              <option value="user">User</option>
-              <option value="editor">Editor</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div> */}
 
           <button
             onClick={() => handleLogin()}

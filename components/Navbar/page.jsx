@@ -2,10 +2,13 @@
 import { SiSharex } from "react-icons/si";
 import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+  }, []);
 
   return (
     <>

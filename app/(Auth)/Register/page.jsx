@@ -9,24 +9,33 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
-
+import { useRouter } from "next/router";
 const RegisterPage = () => {
+  const router = useRouter();
   const [selectedRole, setSelectedRole] = useState("user");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleRegistration = async () => {
-    const user = await axios.post("/api/USER/registration", {
-      name,
-      email,
-      password,
-      role: selectedRole,
-    });
-    if (!user) {
-      return;
+    try {
+      const user = await axios.post("/api/USER/registration", {
+        name,
+        email,
+        password,
+        role: selectedRole,
+      });
+      if (!user) {
+        return;
+      }
+      localStorage.setItem("user", JSON.stringify(user));
+
+      console.log("user created", user);
+      router.push("/");
+    } catch (error) {
+      console.log("error in frontend of register", error);
+      router.push("/Register");
     }
-    console.log("user created", user);
   };
 
   return (

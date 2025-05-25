@@ -16,10 +16,10 @@ export async function POST(request) {
         password,
       },
     });
-
+    const { password: _, ...user } = newuser;
     return NextResponse.json({
       message: "new user created successfully",
-      newuser,
+      user,
     });
   } catch (e) {
     console.log("error on create user", e);
