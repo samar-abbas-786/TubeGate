@@ -63,7 +63,7 @@ const Navbar = () => {
         <ul className="flex flex-col space-y-8 items-center mt-10">
           <li>
             <Link
-              href="/register"
+              href="/Register"
               className="text-2xl text-white/90 hover:text-purple-400 transition-all duration-300 font-medium"
               onClick={() => setIsOpen(false)}
             >
@@ -72,7 +72,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/login"
+              href="/Login"
               className="px-8 py-3 text-xl rounded-lg bg-gradient-to-r from-purple-600 to-purple-800 text-white hover:from-purple-700 hover:to-purple-900 transition-all duration-300 shadow-lg hover:shadow-purple-500/20 font-medium"
               onClick={() => setIsOpen(false)}
             >
