@@ -6,11 +6,28 @@ import {
   FaUserEdit,
   FaUser,
 } from "react-icons/fa";
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 
 const RegisterPage = () => {
   const [selectedRole, setSelectedRole] = useState("user");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegistration = async () => {
+    const user = await axios.post("/api/USER/registration", {
+      name,
+      email,
+      password,
+      role: selectedRole,
+    });
+    if (!user) {
+      return;
+    }
+    console.log("user created", user);
+  };
 
   return (
     <div className="min-h-screen bg-black text-gray-100 flex items-center justify-center p-4">
@@ -67,7 +84,18 @@ const RegisterPage = () => {
         </div>
 
         {/* Form */}
-        <form className="space-y-4">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-gray-300 mb-2">Full Name</label>
+            <input
+              type="text"
+              name="name"
+              className="w-full bg-black border border-purple-900/50 rounded-lg px-4 py-3 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none transition"
+              placeholder="John Doe"
+              required
+            />
+          </div>
+
           <div>
             <label className="block text-gray-300 mb-2">Email</label>
             <input
@@ -91,12 +119,12 @@ const RegisterPage = () => {
           <input type="hidden" name="role" value={selectedRole} />
 
           <button
-            type="submit"
+            onClick={() => handleRegistration()}
             className="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-medium hover:from-purple-700 hover:to-purple-900 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-purple-500/30 mt-6"
           >
             Register as {selectedRole} <FaArrowRight />
           </button>
-        </form>
+        </div>
 
         <div className="mt-6 text-center text-gray-400">
           Already have an account?{" "}
