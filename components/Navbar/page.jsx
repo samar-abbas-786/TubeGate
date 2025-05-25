@@ -12,7 +12,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    setIsLoggedIn(!!user); // true if user exists
+    setIsLoggedIn(!!user); 
   }, []);
 
   const handleLogout = () => {
@@ -23,9 +23,8 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Desktop Navbar */}
       <nav className="sticky top-0 z-50 h-16 flex items-center justify-between px-6 md:px-12 backdrop-blur-md bg-black border-b border-purple-900/30 shadow-purple-500 shadow-xs">
-        {/* Logo */}
+        
         <Link href="/" className="flex items-center gap-2 group z-50">
           <SiSharex
             className="text-purple-500 group-hover:text-purple-300 transition-all duration-300 transform group-hover:scale-110"
@@ -36,7 +35,6 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-6 md:space-x-8">
           {!isLoggedIn ? (
             <>
@@ -73,7 +71,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 rounded-lg text-red-400 hover:text-red-700  transition-all duration-300 shadow-lg font-medium text-sm md:text-base"
+                  className="px-4 py-2 rounded-lg text-red-800 hover:text-red-700  transition-all duration-300 shadow-lg font-medium text-sm md:text-base"
                 >
                   Logout
                 </button>
@@ -82,7 +80,6 @@ const Navbar = () => {
           )}
         </ul>
 
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden text-purple-400 focus:outline-none z-50"
           onClick={() => setIsOpen(!isOpen)}
@@ -91,7 +88,6 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <div
         className={`fixed inset-0 bg-black/95 z-40 pt-20 px-6 transition-all duration-300 ease-in-out ${
           isOpen ? "translate-y-0" : "-translate-y-full"
@@ -133,7 +129,7 @@ const Navbar = () => {
                   handleLogout();
                   setIsOpen(false);
                 }}
-                className="px-6 py-2 text-lg rounded-lg  text-red-400 hover:text-red-700 transition-all duration-300 shadow-lg font-medium"
+                className="px-6 py-2 text-lg rounded-lg  text-red-800 hover:text-red-700 transition-all duration-300 shadow-lg font-medium"
               >
                 Logout
               </button>
