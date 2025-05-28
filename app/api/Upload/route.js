@@ -15,23 +15,22 @@ export async function POST(request) {
     version: "v3",
     auth: oauth2Client,
   });
-
+  const { title, description, privacyStatus } = await request.json();
+  const video = request.file.path;
   try {
     const res = await youtube.videos.insert({
       part: "snippet,status",
       requestBody: {
         snippet: {
-          title: "My Test Video",
-          description: "Uploaded using Google API and access token",
+          title: title,
+          description: description,
         },
         status: {
-          privacyStatus: "private",
+          privacyStatus: privacyStatus,
         },
       },
       media: {
-        body: fs.createReadStream(
-          "C:/Users/HP/Videos/Screen Recordings/yt-test.mp4"
-        ),
+        body: fs.createReadStream(video),
       },
     });
 
