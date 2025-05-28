@@ -26,7 +26,9 @@ export async function GET(request) {
       httpOnly: true,
       path: "/",
     });
-    const response = NextResponse.json({ message: "Token set" });
+    const response = NextResponse.redirect(
+      new URL("/UploadVideo", request.url)
+    );
 
     response.headers.append("Set-Cookie", cookie);
     return response;
