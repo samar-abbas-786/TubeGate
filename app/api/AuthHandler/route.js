@@ -1,6 +1,7 @@
 // app/api/AuthHandler/route.js
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
+import { serialize } from "cookie";
 
 export async function GET(request) {
   const url = new URL(request.url);
@@ -20,7 +21,15 @@ export async function GET(request) {
     const { tokens } = await oauth2Client.getToken(code);
     console.log("Tokens:", tokens);
 
-    return NextResponse.json(tokens); 
+    const cookie = serialize("access-toekn", tokens.access_token, {
+      maxAge: 60 * 60,
+      httpOnly: true,
+      path: "/",
+    });
+    const response = NextResponse.json({ message: "Token set" });
+
+    response.headers.append("Set-Cookie", cookie);
+    return response;
   } catch (error) {
     console.error("OAuth Error:", error);
     return NextResponse.json(
