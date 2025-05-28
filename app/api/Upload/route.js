@@ -3,7 +3,6 @@ import { google } from "googleapis";
 import fs from "fs";
 
 export async function POST(request) {
-  // Correct cookie name, make sure it's the same as you set in auth handler
   const token = request.cookies.get("access-token")?.value;
   if (!token) {
     return NextResponse.redirect(new URL("/api/OAuth", request.url));
@@ -26,12 +25,12 @@ export async function POST(request) {
           description: "Uploaded using Google API and access token",
         },
         status: {
-          privacyStatus: "private", // or "public" / "unlisted"
+          privacyStatus: "private",
         },
       },
       media: {
         body: fs.createReadStream(
-          "C:/Users/HP/Videos/Screen Recordings/yt-test.mp4" // Ensure this path is correct on your server
+          "C:/Users/HP/Videos/Screen Recordings/yt-test.mp4"
         ),
       },
     });
