@@ -4,9 +4,12 @@ import fs from "fs";
 
 export async function POST(request) {
   const token = request.cookies.get("access-token")?.value;
+  console.log("Token on cookie", token);
+
   if (!token) {
     return NextResponse.redirect(new URL("/api/OAuth", request.url));
   }
+  console.log("Token on cookie", token);
 
   const oauth2Client = new google.auth.OAuth2();
   oauth2Client.setCredentials({ access_token: token });
@@ -15,22 +18,23 @@ export async function POST(request) {
     version: "v3",
     auth: oauth2Client,
   });
-  const { title, description, privacyStatus } = await request.json();
-  const video = request.file.path;
+
   try {
     const res = await youtube.videos.insert({
       part: "snippet,status",
       requestBody: {
         snippet: {
-          title: title,
-          description: description,
+          title: "My Test Video",
+          description: "Uploaded using Google API and access token",
         },
         status: {
-          privacyStatus: privacyStatus,
+          privacyStatus: "private",
         },
       },
       media: {
-        body: fs.createReadStream(video),
+        body: fs.createReadStream(
+          "C:/Users/HP/Videos/Screen Recordings/yt-test.mp4"
+        ),
       },
     });
 

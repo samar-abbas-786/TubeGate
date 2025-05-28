@@ -21,7 +21,7 @@ export async function GET(request) {
     const { tokens } = await oauth2Client.getToken(code);
     console.log("Tokens:", tokens);
 
-    const cookie = serialize("access-toekn", tokens.access_token, {
+    const cookie = serialize("access-token", tokens.access_token, {
       maxAge: 60 * 60,
       httpOnly: true,
       path: "/",
