@@ -3,7 +3,7 @@ import { google } from "googleapis";
 import fs from "fs";
 
 export async function POST(request) {
-  // Correct cookie name, make sure it's the same as you set in auth handler
+  
   const token = request.cookies.get("access-token")?.value;
   if (!token) {
     return NextResponse.redirect(new URL("/api/OAuth", request.url));
