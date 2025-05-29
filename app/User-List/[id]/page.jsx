@@ -1,17 +1,17 @@
-const Editor = async ({ params }) => {
+const User = async ({ params }) => {
   const res = await fetch(
-    `http://localhost:3000/api/USER/GetEditor/${params.id}`,
+    `http://localhost:3000/api/USER/GetUser/${params.id}`,
     {
       cache: "no-store",
     }
   );
 
   if (!res.ok) {
-    return <div className="text-red-500">Editor not found</div>;
+    return <div className="text-red-500">User not found</div>;
   }
 
   const data = await res.json();
-  const user = data.editor;
+  const user = data.user;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center px-4 py-10">
@@ -26,15 +26,9 @@ const Editor = async ({ params }) => {
 
         {/* Email */}
         <p className="text-purple-200 text-sm">{user.email}</p>
-        {/* <a
-          className="text-purple-200 text-sm"
-          href={`mailto:${user.email}?subject=Hello`}
-        >
-          {user.email}
-        </a> */}
 
         {/* Role */}
-        <span className="inline-block mt-2 px-4 py-1 bg-purple-600 text-white rounded-full text-sm uppercase tracking-wider">
+        <span className="inline-block mt-2 px-4 py-1 bg-purple-600 text-white rounded-full text-sm">
           {user.role}
         </span>
       </div>
@@ -42,4 +36,4 @@ const Editor = async ({ params }) => {
   );
 };
 
-export default Editor;
+export default User;
