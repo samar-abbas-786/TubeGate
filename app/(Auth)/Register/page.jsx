@@ -18,7 +18,8 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleRegistration = async () => {
+  const handleRegistration = async (e) => {
+    e.preventDefault();
     try {
       const user = await axios.post("/api/USER/registration", {
         name,
@@ -27,11 +28,10 @@ const RegisterPage = () => {
         role: selectedRole,
       });
       if (!user) {
-        return;
+        return console.log("user error", "No userr");
       }
-      localStorage.setItem("user", JSON.stringify(user));
-
-      console.log("user created", user);
+      localStorage.setItem("user", JSON.stringify(user?.data.user));
+      console.log("user", user?.data);
       router.push("/");
     } catch (error) {
       console.log("error in frontend of register", error);
@@ -100,6 +100,8 @@ const RegisterPage = () => {
             <input
               type="text"
               name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full bg-black border border-purple-900/50 rounded-lg px-4 py-3 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none transition"
               placeholder="John Doe"
               required
@@ -110,6 +112,8 @@ const RegisterPage = () => {
             <label className="block text-gray-300 mb-2">Email</label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-black border border-purple-900/50 rounded-lg px-4 py-3 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none transition"
               placeholder="you@example.com"
               required
@@ -120,6 +124,8 @@ const RegisterPage = () => {
             <label className="block text-gray-300 mb-2">Password</label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-black border border-purple-900/50 rounded-lg px-4 py-3 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none transition"
               placeholder="••••••••"
               required
@@ -129,7 +135,7 @@ const RegisterPage = () => {
           <input type="hidden" name="role" value={selectedRole} />
 
           <button
-            onClick={() => handleRegistration()}
+            onClick={handleRegistration}
             className="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-medium hover:from-purple-700 hover:to-purple-900 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-purple-500/30 mt-6"
           >
             Register as {selectedRole} <FaArrowRight />

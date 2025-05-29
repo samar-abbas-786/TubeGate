@@ -3,9 +3,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   const { name, email, password, role } = await request.json();
-  console.log("registration", name, email, password, role);
+  console.log("registration", name);
   if (!name || !email || !password) {
-    return NextResponse.json({ messgage: "all fields required" });
+    return NextResponse.json(
+      { messgage: "all fields required" },
+      { status: 500 }
+    );
   }
   try {
     const newuser = await prisma.user.create({
