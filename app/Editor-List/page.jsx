@@ -30,7 +30,7 @@ const GetEditor = () => {
       <ul className="w-full max-w-md space-y-4">
         {userlist.map((user, index) => (
           <Link
-            href={`/editor/${user.id}`}
+            href={`/Editor-List/${user.id}`}
             key={index}
             className="block w-full bg-purple-900/20 border border-purple-600/30 rounded-lg px-6 py-4 shadow-md hover:shadow-purple-500/20 transition-all"
           >
