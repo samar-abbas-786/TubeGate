@@ -8,9 +8,16 @@ export async function GET(request) {
         role: "editor",
       },
     });
+    //    const { password: _, ...user } = newuser;
+
+    let editor = [];
+    alleditor.map((e) => {
+      let { password: _, ...user } = e;
+      editor.push(user);
+    });
     return NextResponse.json({
       message: "Successfully got all editor",
-      alleditor,
+      editor,
     });
   } catch (error) {
     return NextResponse.json({ message: "failed to got all editor", error });

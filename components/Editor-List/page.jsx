@@ -1,11 +1,12 @@
-import React from 'react'
-
+"use client";
+import axios from "axios";
+import { useState } from "react";
 const GetEditor = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const [userlist, setUserlist] = useState([]);
+  const getUserList=async()=>{
+    const response=await axios.get('')
+  }
+  return <div></div>;
+};
 
-export default GetEditor
+export default GetEditor;
