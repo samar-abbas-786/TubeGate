@@ -8,9 +8,14 @@ export async function GET(request) {
         role: "user",
       },
     });
+    let userlist = [];
+    alluser.map((e) => {
+      let { password: _, ...user } = e;
+      userlist.push(user);
+    });
     return NextResponse.json({
       message: "Successfully got all user",
-      alluser,
+      userlist,
     });
   } catch (error) {
     return NextResponse.json({ message: "failed to got all user", error });

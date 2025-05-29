@@ -8,7 +8,6 @@ export async function GET(request) {
         role: "editor",
       },
     });
-    //    const { password: _, ...user } = newuser;
 
     let editor = [];
     alleditor.map((e) => {
