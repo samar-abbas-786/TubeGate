@@ -10,3 +10,6 @@
 ::-webkit-scrollbar {
   width: 0; /* Correct width for the scrollbar */
 }
+html {
+  scroll-behavior: smooth;
+}

@@ -47,7 +47,7 @@ export default function HowItWorks() {
 
 function Step({ icon, title, description }) {
   return (
-    <div className="bg-purple-900/30 rounded-xl p-8 shadow-lg hover:bg-purple-800/50 transition duration-300 cursor-default text-center">
+    <div className="bg-purple-900/30  rounded-xl p-8 shadow-lg hover:bg-purple-800/50 transition duration-300 cursor-default text-center">
       {icon}
       <h3 className="text-white text-2xl font-semibold mb-3">{title}</h3>
       <p className="text-gray-300">{description}</p>

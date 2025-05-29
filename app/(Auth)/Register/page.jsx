@@ -9,7 +9,8 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 const RegisterPage = () => {
   const router = useRouter();
   const [selectedRole, setSelectedRole] = useState("user");
