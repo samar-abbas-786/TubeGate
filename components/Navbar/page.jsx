@@ -63,15 +63,15 @@ const Navbar = () => {
                 <>
                   <Link
                     className="text-white hover:text-purple-300 font-medium transition"
-                    href="/MyEditor"
+                    href="/My User"
                   >
-                    My Editor
+                    My User
                   </Link>
                   <Link
                     className="text-white hover:text-purple-300 font-medium transition"
-                    href="/AllEditors"
+                    href="/User-List"
                   >
-                    All Editors
+                    All User
                   </Link>
                 </>
               )}
@@ -79,15 +79,15 @@ const Navbar = () => {
                 <>
                   <Link
                     className="text-white hover:text-purple-300 font-medium transition"
-                    href="/MyUsers"
+                    href="/My Editor"
                   >
-                    My Users
+                    My Editor
                   </Link>
                   <Link
                     className="text-white hover:text-purple-300 font-medium transition"
-                    href="/AllUsers"
+                    href="/Editor-List"
                   >
-                    All Users
+                    All Editor
                   </Link>
                 </>
               )}
