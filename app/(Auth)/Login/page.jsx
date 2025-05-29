@@ -10,11 +10,13 @@ import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../../../context/authContext";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [role, setRole] = useState("user");
+  const { user, setUser } = useAuth();
 
   const router = useRouter();
   const handleLogin = async () => {
@@ -26,7 +28,9 @@ const LoginPage = () => {
 
       if (response.status === 200) {
         console.log("user", response.data);
+        setUser(response.data.user);
         localStorage.setItem("user", JSON.stringify(response.data.user));
+
         router.push("/");
       } else {
         router.push("/Login");

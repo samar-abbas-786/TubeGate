@@ -2,18 +2,18 @@
 import { SiSharex } from "react-icons/si";
 import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { useAuth } from "../../context/authContext";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useContext();
   const router = useRouter();
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
-  }, []);
+  const { user, setUser } = useAuth();
+  // useEffect(() => {
+  //   const storedUser = JSON.parse(localStorage.getItem("user"));
+  //   setUser(storedUser);
+  // }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
