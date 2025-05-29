@@ -2,23 +2,39 @@
 import { SiSharex } from "react-icons/si";
 import { FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/authContext";
+import { useState } from "react";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const [user, setUser] = useContext();
   const router = useRouter();
   const { user, setUser } = useAuth();
-  // useEffect(() => {
-  //   const storedUser = JSON.parse(localStorage.getItem("user"));
-  //   setUser(storedUser);
-  // }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
+    setIsOpen(false);
     router.push("/Login");
+  };
+
+  const renderUserLinks = () => {
+    if (!user) return null;
+
+    const commonLinks = [{ label: "Dashboard", href: "/Dashboard" }];
+
+    const roleLinks =
+      user.role === "editor"
+        ? [
+            { label: "My User", href: "/My User" },
+            { label: "All User", href: "/User-List" },
+          ]
+        : [
+            { label: "My Editor", href: "/My Editor" },
+            { label: "All Editor", href: "/Editor-List" },
+          ];
+
+    return [...roleLinks, ...commonLinks];
   };
 
   return (
@@ -34,18 +50,16 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <ul className="hidden md:flex space-x-6 md:space-x-8">
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-6 md:space-x-8 items-center">
           {!user ? (
             <>
               <li>
                 <Link
                   href="/Register"
-                  className="relative text-white/90 hover:text-white transition-all duration-300 text-sm md:text-base font-medium"
+                  className="text-white/90 hover:text-white transition-all duration-300 text-sm md:text-base font-medium"
                 >
-                  <span className="relative group">
-                    Register
-                    <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-purple-400 transition-all duration-300 group-hover:w-full" />
-                  </span>
+                  Register
                 </Link>
               </li>
               <li>
@@ -58,55 +72,30 @@ const Navbar = () => {
               </li>
             </>
           ) : (
-            <div className="flex items-center gap-5">
-              {user.role === "user" && (
-                <>
+            <>
+              {renderUserLinks().map((link) => (
+                <li key={link.label}>
                   <Link
+                    href={link.href}
                     className="text-white hover:text-purple-300 font-medium transition"
-                    href="/My User"
                   >
-                    My User
+                    {link.label}
                   </Link>
-                  <Link
-                    className="text-white hover:text-purple-300 font-medium transition"
-                    href="/User-List"
-                  >
-                    All User
-                  </Link>
-                </>
-              )}
-              {user.role === "editor" && (
-                <>
-                  <Link
-                    className="text-white hover:text-purple-300 font-medium transition"
-                    href="/My Editor"
-                  >
-                    My Editor
-                  </Link>
-                  <Link
-                    className="text-white hover:text-purple-300 font-medium transition"
-                    href="/Editor-List"
-                  >
-                    All Editor
-                  </Link>
-                </>
-              )}
-              <Link
-                href="/Dashboard"
-                className="text-white hover:text-purple-300 font-medium transition"
-              >
-                Dashboard
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 rounded-lg text-red-800 hover:text-red-700 transition-all duration-300 shadow-lg font-medium text-sm md:text-base"
-              >
-                Logout
-              </button>
-            </div>
+                </li>
+              ))}
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 rounded-lg text-red-800 hover:text-red-700 transition-all duration-300 font-medium text-sm md:text-base"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
           )}
         </ul>
 
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden text-purple-400 focus:outline-none z-50"
           onClick={() => setIsOpen(!isOpen)}
@@ -115,19 +104,19 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       <div
         className={`fixed inset-0 bg-black/95 z-40 pt-20 px-6 transition-all duration-300 ease-in-out ${
           isOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <ul className="flex flex-col space-y-8 items-center mt-10">
+        <ul className="flex flex-col space-y-8 items-center">
           {!user ? (
             <>
               <li>
                 <Link
                   href="/Register"
-                  className="text-2xl text-white/90 hover:text-purple-400 transition-all duration-300 font-medium"
+                  className="text-2xl text-white/90 hover:text-purple-400 transition font-medium"
                   onClick={() => setIsOpen(false)}
                 >
                   Register
@@ -144,24 +133,27 @@ const Navbar = () => {
               </li>
             </>
           ) : (
-            <div className="flex flex-col gap-5">
-              <Link
-                href="/Dashboard"
-                className="text-2xl text-white/90 hover:text-purple-400 transition-all duration-300 font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                Dashboard
-              </Link>
-              <button
-                onClick={() => {
-                  handleLogout();
-                  setIsOpen(false);
-                }}
-                className="px-6 py-2 text-lg rounded-lg text-red-800 hover:text-red-700 transition-all duration-300 shadow-lg font-medium"
-              >
-                Logout
-              </button>
-            </div>
+            <>
+              {renderUserLinks().map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-2xl text-white/90 hover:text-purple-400 transition font-medium"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="px-6 py-2 text-lg rounded-lg text-red-800 hover:text-red-700 transition font-medium"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
           )}
         </ul>
       </div>
