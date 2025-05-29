@@ -23,7 +23,7 @@ model User {
 
   receivedShares Share[]   @relation("ReceivedShares")
   sentShares     Share[]   @relation("SentShares")
-  content        Content[] // content uploaded by user/editor
+  content        Content[]
 }
 
 model Content {
@@ -39,15 +39,15 @@ model Content {
 
 model Share {
   user    User   @relation("ReceivedShares", fields: [user_id], references: [id])
-  user_id String 
+  user_id String
 
   editor    User   @relation("SentShares", fields: [editor_id], references: [id])
-  editor_id String 
+  editor_id String
 
   content    Content @relation(fields: [content_id], references: [id])
-  content_id String 
+  content_id String
 
   createdAt DateTime @default(now())
 
-  @@id([user_id, editor_id, content_id]) 
+  @@id([user_id, editor_id, content_id])
 }
