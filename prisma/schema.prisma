@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../lib/generated/prisma"
@@ -14,21 +8,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id             String    @id @default(uuid())
-  name           String
-  email          String    @unique
-  password       String
-  role           Role      @default(user)
-  content        Content[]
-  sentShares     Share[]   @relation("UserShares")
-  receivedShares Share[]   @relation("EditorShares")
-}
-
 enum Role {
   user
   editor
   admin
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  role     Role   @default(user)
+
+  receivedShares Share[]   @relation("ReceivedShares")
+  sentShares     Share[]   @relation("SentShares")
+  content        Content[] // content uploaded by user/editor
 }
 
 model Content {
@@ -43,16 +38,16 @@ model Content {
 }
 
 model Share {
-  user    User   @relation("UserShares", fields: [user_id], references: [id])
-  user_id String
+  user    User   @relation("ReceivedShares", fields: [user_id], references: [id])
+  user_id String 
 
-  editor    User   @relation("EditorShares", fields: [editor_id], references: [id])
-  editor_id String
+  editor    User   @relation("SentShares", fields: [editor_id], references: [id])
+  editor_id String 
 
   content    Content @relation(fields: [content_id], references: [id])
-  content_id String
+  content_id String 
 
   createdAt DateTime @default(now())
 
-  @@id([user_id, editor_id, content_id])
+  @@id([user_id, editor_id, content_id]) 
 }
