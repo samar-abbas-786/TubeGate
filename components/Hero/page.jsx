@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-b  from-black pt-[10vh]  to-black min-h-[90vh] flex items-center justify-center px-6 md:px-12 overflow-hidden">
+    <section className="relative bg-gradient-to-b  from-black pt-28 md:pt-15  to-black min-h-[90vh] flex items-center justify-center px-6 md:px-12 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden opacity-30">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-purple-700/30 blur-[100px] animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-purple-900/30 blur-[100px] animate-pulse delay-300" />
