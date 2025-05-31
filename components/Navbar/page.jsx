@@ -40,7 +40,7 @@ const Navbar = () => {
       },
       {
         label: "Pricing",
-        href: "/Dashboard/IncomingVideoUpload",
+        href: "/#pricing",
         icon: "💲",
       },
     ];
