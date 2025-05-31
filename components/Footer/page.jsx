@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-slate-950 to-black text-gray-300 px-6 md:px-12 py-16 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-black  shadow-sm shadow-purple-900 to-black text-gray-300 px-6 md:px-12 py-16 overflow-hidden">
       {/* Enhanced background effects */}
       <div className="absolute inset-0 overflow-hidden opacity-30 -z-10">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-700/20 rounded-full blur-[120px] animate-pulse" />
