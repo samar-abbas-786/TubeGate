@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const Getuser = () => {
   const [userlist, setUserlist] = useState([]);
+  const user2 = JSON.parse(localStorage.getItem("user"));
 
   const getUserList = async () => {
     try {
@@ -29,15 +30,28 @@ const Getuser = () => {
 
       <ul className="w-full max-w-md space-y-4">
         {userlist.map((user, index) => (
-          <Link
-            href={`/User-List/${user.id}`}
+          <li
             key={index}
-            className="block w-full bg-purple-900/20 border border-purple-600/30 rounded-lg px-6 py-4 shadow-md hover:shadow-purple-500/20 transition-all"
+            className="bg-purple-900/20 border border-purple-600/30 rounded-lg px-6 py-4 shadow-md hover:shadow-purple-500/30 transition-all"
           >
-            <span className="text-lg font-medium text-purple-300">
-              {user.name}
-            </span>
-          </Link>
+            <div className="flex justify-between items-center">
+              <Link
+                href={`/User-List/${user.id}`}
+                className="text-lg font-medium text-purple-300 hover:underline"
+              >
+                {user.name}
+              </Link>
+              {user2?.role === "editor" && (
+                <Link
+                  href={`/Content-Upload/${user.id}`}
+                  // onClick={() => alert(`Send action for ${user.name}`)}
+                  className="ml-4 bg-purple-700 hover:bg-purple-800 text-white text-sm px-4 py-1 rounded shadow transition-all"
+                >
+                  Send
+                </Link>
+              )}
+            </div>
+          </li>
         ))}
       </ul>
     </div>

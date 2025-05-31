@@ -13,8 +13,8 @@ export default function UploadForm() {
 
   const handleUpload = () => {
     openUploadWidget(
-      process.env.NEXT_PUBLIC_CLOUD_NAME,
-      process.env.NEXT_PUBLIC_UPLOAD_PRESET,
+      process.env.NEXT_PUBLIC_CLOUD_NAME, 
+      process.env.NEXT_PUBLIC_UPLOAD_PRESET, 
       (publicId) => setVideoId(publicId)
     );
   };
@@ -28,7 +28,7 @@ export default function UploadForm() {
     }
 
     try {
-      const res = await fetch("/api/Content-Upload", {
+      const res = await fetch("/api/videos", {
         method: "POST",
         body: JSON.stringify({
           title,
