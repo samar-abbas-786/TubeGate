@@ -36,7 +36,12 @@ const Navbar = () => {
       {
         label: "Dashboard",
         href: "/Dashboard/IncomingVideoUpload",
-        icon: <SiSharex className="mr-2" />,
+        icon: "🛂",
+      },
+      {
+        label: "Pricing",
+        href: "/Dashboard/IncomingVideoUpload",
+        icon: "💲",
       },
     ];
 
@@ -46,24 +51,24 @@ const Navbar = () => {
             {
               label: "My User",
               href: "/My User",
-              icon: <IoMdNotificationsOutline className="mr-2" />,
+              icon: "👤",
             },
             {
               label: "All User",
               href: "/User-List",
-              icon: <SiSharex className="mr-2" />,
+              icon: "👥",
             },
           ]
         : [
             {
               label: "My Editor",
               href: "/My Editor",
-              icon: <IoMdNotificationsOutline className="mr-2" />,
+              icon: "👤",
             },
             {
               label: "All Editor",
               href: "/Editor-List",
-              icon: <SiSharex className="mr-2" />,
+              icon: "👥",
             },
           ];
 

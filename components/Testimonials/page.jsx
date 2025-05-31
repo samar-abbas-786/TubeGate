@@ -76,7 +76,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative bg-gradient-to-b from-black to-gray-900 min-h-screen flex flex-col items-center px-4 sm:px-8 py-12 md:py-16 lg:py-20 text-gray-300 overflow-hidden"
+      className="relative bg-gradient-to-b from-black to-black min-h-screen flex flex-col items-center px-4 sm:px-8 py-12 md:py-16 lg:py-20 text-gray-300 overflow-hidden"
     >
       {/* Background Glow Effects */}
       <div className="absolute inset-0 overflow-hidden opacity-30 -z-10">
