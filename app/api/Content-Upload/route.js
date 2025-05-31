@@ -2,9 +2,9 @@ import prisma from "DB/db.config";
 import { NextResponse } from "next/server";
 async function POST(request) {
   try {
-    const { title, description, userId, privacyStatus, file } =
+    const { title, description, userId, privacyStatus, publicId } =
       await request.json();
-    if (!title || !description || !userId || !privacyStatus || !file) {
+    if (!title || !description || !userId || !privacyStatus || !publicId) {
       return NextResponse.json(
         { message: "all field required" },
         { status: 500 }
@@ -15,7 +15,7 @@ async function POST(request) {
       description,
       privacyStatus,
       userId,
-      file,
+      publicId,
     });
     if (!content) {
       return NextResponse.json(
