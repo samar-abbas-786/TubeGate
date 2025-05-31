@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const Getuser = () => {
   const [userlist, setUserlist] = useState([]);
-  const user2 = JSON.parse(localStorage.getItem("user"));
+  // const user2 = JSON.parse(localStorage.getItem("user"));
 
   const getUserList = async () => {
     try {
@@ -41,7 +41,7 @@ const Getuser = () => {
               >
                 {user.name}
               </Link>
-              {user2?.role === "editor" && (
+              {
                 <Link
                   href={`/Content-Upload/${user.id}`}
                   // onClick={() => alert(`Send action for ${user.name}`)}
@@ -49,7 +49,7 @@ const Getuser = () => {
                 >
                   Send
                 </Link>
-              )}
+              }
             </div>
           </li>
         ))}
