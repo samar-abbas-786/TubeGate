@@ -28,7 +28,7 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            href="/register"
+            href="/"
             className="px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-purple-800 text-white hover:from-purple-700 hover:to-purple-900 transition-all duration-300 shadow-lg hover:shadow-purple-500/30 font-medium flex items-center gap-2 group"
           >
             <FaRocket className="group-hover:animate-bounce" />
