@@ -144,7 +144,7 @@ const Hero = () => {
 
           {/* CTA buttons with advanced effects */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-            <button className="group relative px-10 py-5 rounded-2xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 text-white font-bold text-lg overflow-hidden hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-violet-500/25">
+            <button className="group relative px-10 py-5 rounded-2xl bg-gradient-to-r from-violet-700 via-fuchsia-600 to-purple-700 text-white font-bold text-lg overflow-hidden hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-violet-500/25">
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <span className="relative flex items-center gap-3">
