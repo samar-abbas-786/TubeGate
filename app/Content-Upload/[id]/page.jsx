@@ -1,34 +1,27 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { CldUploadButton } from "next-cloudinary";
-import { useParams } from "next/navigation";
+import { useState } from "react";
 import { CldUploadWidget } from "next-cloudinary";
+import { useParams } from "next/navigation";
 
 export default function UploadForm() {
-  const [data, setData] = useState();
-  const [title,setTitle]=useState()
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    privacyStatus: "public",
-    publicId: "",
-  });
+  //   const [data, setData] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [privacyStatus, setPrivacyStatus] = useState("public");
+  const [url, setUrl] = useState("");
   const [message, setMessage] = useState("");
   const params = useParams();
 
-  const handleUpload = (result) => {
-    setFormData((prev) => ({
-      ...prev,
-      publicId: result.info.public_id,
-    }));
+  const handleUploadSuccess = (result) => {
+    setUrl(result.info.secure_url);
     setMessage("Video uploaded to Cloudinary successfully.");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.publicId) {
+    if (!url) {
       setMessage("Please upload a video first");
       return;
     }
@@ -37,39 +30,32 @@ export default function UploadForm() {
       const res = await fetch("/api/POST_CONTENT", {
         method: "POST",
         body: JSON.stringify({
-          ...formData,
-          userID: params.id,
+          title,
+          description,
+          privacyStatus,
+          url,
+          userId: params.id,
         }),
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      const data = await res.json();
+      const resData = await res.json();
 
-      if (data.success) {
+      if (resData.success) {
         setMessage("Video saved to database successfully!");
-        setFormData({
-          title: "",
-          description: "",
-          privacyStatus: "public",
-          publicId: "",
-        });
+        setTitle("");
+        setDescription("");
+        setPrivacyStatus("public");
+        setUrl("");
       } else {
-        setMessage(data.message || "Failed to save video.");
+        setMessage(resData.message || "Failed to save video.");
       }
     } catch (err) {
       console.error(err);
       setMessage("An error occurred while saving the video.");
     }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
   };
 
   return (
@@ -79,51 +65,45 @@ export default function UploadForm() {
           Upload Video
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Cloudinary Upload Button */}
+          {/* Cloudinary Upload Widget */}
           <div>
             <label className="block text-purple-300 mb-2">Video</label>
-            {/* <CldUploadButton
-              uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
-              onUploadAdded={handleUpload}
-              options={{ resourceType: "video" }}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 cursor-pointer text-center"
-            >
-              {formData.publicId ? "Upload Another Video" : "Upload Video"}
-            </CldUploadButton> */}
             <CldUploadWidget
               uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
-              onSuccess={(result, { widget }) => {
-                setData(result?.info);
-                console.log("Upload result:", result);
-              }}
+              onSuccess={handleUploadSuccess}
             >
-              {({ open }) => {
-                return (
-                  <div>
-                    <button onClick={() => open()}>Upload</button>
-                  </div>
-                );
-              }}
+              {({ open }) => (
+                <button
+                  type="button"
+                  onClick={() => open()}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 cursor-pointer"
+                >
+                  {url ? "Upload Another Video" : "Upload Video"}
+                </button>
+              )}
             </CldUploadWidget>
+          </div>
 
-            {formData.publicId && (
-              <p className="mt-3 text-sm text-purple-300 bg-gray-700 p-3 rounded-lg break-all">
-                <span className="font-semibold">Public ID:</span>{" "}
-                {formData.publicId}
-              </p>
+          {/* Video Preview */}
+          {/* Video Preview */}
+          <div>
+            {url && (
+              <video
+                controls
+                src={url}
+                className="w-full h-[360px] rounded-lg"
+              ></video>
             )}
           </div>
-          <div>
-            <video src={data?.secure_url}></video>
-          </div>
+
           {/* Title Input */}
           <div>
             <label className="block text-purple-300 mb-2">Title</label>
             <input
               type="text"
               name="title"
-              value={formData.title}
-              onChange={handleChange}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter video title"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
               required
@@ -135,8 +115,8 @@ export default function UploadForm() {
             <label className="block text-purple-300 mb-2">Description</label>
             <textarea
               name="description"
-              value={formData.description}
-              onChange={handleChange}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               placeholder="Enter video description"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-500 h-32"
               required
@@ -148,8 +128,8 @@ export default function UploadForm() {
             <label className="block text-purple-300 mb-2">Privacy Status</label>
             <select
               name="privacyStatus"
-              value={formData.privacyStatus}
-              onChange={handleChange}
+              value={privacyStatus}
+              onChange={(e) => setPrivacyStatus(e.target.value)}
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               <option value="public" className="bg-gray-800">
@@ -167,9 +147,9 @@ export default function UploadForm() {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={!formData.publicId}
+            disabled={!url}
             className={`w-full ${
-              formData.publicId
+              url
                 ? "bg-purple-800 hover:bg-purple-900"
                 : "bg-purple-600 cursor-not-allowed"
             } text-white font-bold py-3 px-6 rounded-lg transition duration-200`}

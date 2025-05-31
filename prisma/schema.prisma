@@ -31,7 +31,7 @@ model Content {
   title         String
   description   String
   privacyStatus String
-  publicId      String
+  url           String
   user          User?   @relation(fields: [userId], references: [id])
   userId        String?
   shares        Share[]

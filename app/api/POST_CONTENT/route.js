@@ -1,60 +1,42 @@
-import { writeFile } from "fs/promises";
-import path from "path";
-import cloudinary from "utils/cloudinary";
 import prisma from "DB/db.config";
 import { NextResponse } from "next/server";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-import { IncomingForm } from "formidable";
-import fs from "fs";
-
-// disable default body parsing
-export const dynamic = "force-dynamic";
-
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const data = await new Promise((resolve, reject) => {
-      const form = new IncomingForm({
-        uploadDir: "/tmp",
-        keepExtensions: true,
-      });
+    const { title, description, privacyStatus, userId, url } =
+      await request.json();
 
-      form.parse(req, (err, fields, files) => {
-        if (err) reject(err);
-        resolve({ fields, files });
-      });
-    });
+    if (!title || !description || !privacyStatus || !userId || !url) {
+      return NextResponse.json(
+        { success: false, message: "Missing required fields" },
+        { status: 400 }
+      );
+    }
 
-    const { title, description, privacyStatus, userID } = data.fields;
-    const videoFile = data.files.file;
-
-    const result = await cloudinary.uploader.upload_large(videoFile.filepath, {
-      resource_type: "video",
-      folder: "uploads",
-    });
-
-    const video = await prisma.content.create({
+    const newContent = await prisma.content.create({
       data: {
         title,
         description,
-        userID,
         privacyStatus,
-        publicId: result.public_id,
-        // secure_url: result.secure_url,
+        url,
+        userId,
       },
     });
 
-    return NextResponse.json({ success: true, video });
-  } catch (error) {
-    console.error("Upload error:", error);
     return NextResponse.json(
-      { success: false, message: "Upload failed" },
+      { success: true, content: newContent },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("Error creating content:", error);
+    return NextResponse.json(
+      { success: false, message: "Internal server error" },
       { status: 500 }
     );
   }
+}
+
+export async function GET(request) {
+  const video = await prisma.content.findMany({});
+  return NextResponse.json({ video });
 }
