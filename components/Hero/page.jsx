@@ -159,7 +159,7 @@ const Hero = () => {
           </div>
 
           {/* Enhanced description */}
-          <p className="text-xl md:text-2xl text-gray-300 max-w-5xl mx-auto mb-12 leading-relaxed font-light">
+          <p className="text-md px-2 md:text-2xl text-gray-300 max-w-5xl mx-auto mb-12 leading-relaxed font-light">
             Experience the future of content management with
             <span className="font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
               {" "}
