@@ -12,10 +12,10 @@ export default function HowItWorks() {
         <div className="absolute bottom-1/4 right-1/4 w-72 h-72 rounded-full bg-purple-900/30 blur-[120px] animate-pulse delay-300" />
       </div>
 
-      <h2 className="text-4xl p-2 md:text-5xl font-extrabold bg-gradient-to-r from-purple-400 to-white bg-clip-text text-transparent mb-10 text-center max-w-4xl">
+      <h2 className=" p-2 text-3xl sm:text-4xl md:text-[2.5rem] font-extrabold bg-gradient-to-r from-purple-400 to-white bg-clip-text text-transparent mb-10 text-center max-w-4xl">
         How Tubegate Works
       </h2>
-      <p className="max-w-3xl text-center mb-16 text-lg md:text-xl text-gray-400">
+      <p className="max-w-3xl text-center mb-16 text-base sm:text-lg text-gray-400">
         Upload, manage, and publish your YouTube videos with ease — using a
         secure and seamless workflow tailored just for you.
       </p>
