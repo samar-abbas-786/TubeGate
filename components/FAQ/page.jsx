@@ -30,7 +30,7 @@ export default function FAQs() {
   return (
     <section
       id="faq"
-      className="relative bg-gradient-to-b from-black to-black min-h-screen flex flex-col items-center px-6 md:px-12 py-16 text-gray-300 overflow-hidden"
+      className="relative bg-gradient-to-b from-black to-black min-h-[95vh] flex flex-col items-center px-6 md:px-12 py-16 text-gray-300 overflow-hidden"
     >
       {/* Background Blur Pulses */}
       <div className="absolute inset-0 overflow-hidden opacity-20 -z-10">
