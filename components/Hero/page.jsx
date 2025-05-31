@@ -9,16 +9,48 @@ import {
   CheckCircle,
   Youtube,
 } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
+  const router = useRouter();
+
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Fixed positions for particles to avoid hydration mismatch
+  const particlePositions = [
+    { left: "10%", top: "20%", delay: "0s", duration: "3s" },
+    { left: "85%", top: "15%", delay: "0.5s", duration: "4s" },
+    { left: "70%", top: "80%", delay: "1s", duration: "3.5s" },
+    { left: "20%", top: "70%", delay: "1.5s", duration: "4.5s" },
+    { left: "50%", top: "10%", delay: "2s", duration: "3.2s" },
+    { left: "90%", top: "50%", delay: "0.3s", duration: "4.2s" },
+    { left: "5%", top: "90%", delay: "1.8s", duration: "3.8s" },
+    { left: "60%", top: "30%", delay: "0.8s", duration: "4.8s" },
+    { left: "30%", top: "5%", delay: "2.3s", duration: "3.3s" },
+    { left: "75%", top: "65%", delay: "1.2s", duration: "4.3s" },
+    { left: "15%", top: "45%", delay: "0.7s", duration: "3.7s" },
+    { left: "95%", top: "25%", delay: "2.1s", duration: "4.1s" },
+    { left: "40%", top: "85%", delay: "1.6s", duration: "3.6s" },
+    { left: "80%", top: "40%", delay: "0.4s", duration: "4.4s" },
+    { left: "25%", top: "60%", delay: "2.4s", duration: "3.4s" },
+    { left: "65%", top: "75%", delay: "0.9s", duration: "4.9s" },
+    { left: "35%", top: "20%", delay: "1.3s", duration: "3.9s" },
+    { left: "55%", top: "55%", delay: "0.6s", duration: "4.6s" },
+    { left: "45%", top: "35%", delay: "2.2s", duration: "3.1s" },
+    { left: "12%", top: "75%", delay: "1.7s", duration: "4.7s" },
+  ];
 
   useEffect(() => {
+    setIsMounted(true);
     setIsVisible(true);
+
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
+
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
@@ -28,12 +60,14 @@ const Hero = () => {
       {/* Dynamic mesh gradient background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-violet-900/20 via-black to-rose-900/20" />
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.15), transparent 40%)`,
-          }}
-        />
+        {isMounted && (
+          <div
+            className="absolute inset-0 opacity-30 transition-all duration-300"
+            style={{
+              background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.15), transparent 40%)`,
+            }}
+          />
+        )}
       </div>
 
       {/* Animated geometric shapes */}
@@ -52,21 +86,23 @@ const Hero = () => {
         />
       </div>
 
-      {/* Floating particles */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full animate-bounce"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Floating particles - only render after mount */}
+      {isMounted && (
+        <div className="absolute inset-0">
+          {particlePositions.map((particle, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white/20 rounded-full animate-bounce"
+              style={{
+                left: particle.left,
+                top: particle.top,
+                animationDelay: particle.delay,
+                animationDuration: particle.duration,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Grid overlay with glassmorphism */}
       <div className="absolute inset-0 opacity-[0.02]">
@@ -144,7 +180,10 @@ const Hero = () => {
 
           {/* CTA buttons with advanced effects */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-            <button className="group relative px-10 py-5 rounded-2xl bg-gradient-to-r from-violet-700 via-fuchsia-600 to-purple-700 text-white font-bold text-lg overflow-hidden hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-violet-500/25">
+            <button
+              onClick={() => router.push("/Dashboard/IncomingVideoUpload")}
+              className="group relative px-10 py-5 rounded-2xl bg-gradient-to-r from-violet-700 via-fuchsia-600 to-purple-700 text-white font-bold text-lg overflow-hidden hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-violet-500/25"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <span className="relative flex items-center gap-3">
