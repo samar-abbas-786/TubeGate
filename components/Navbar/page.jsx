@@ -35,7 +35,7 @@ const Navbar = () => {
     const commonLinks = [
       {
         label: "Dashboard",
-        href: "/Dashboard",
+        href: "/Dashboard/IncomingVideoUpload",
         icon: <SiSharex className="mr-2" />,
       },
     ];

@@ -6,9 +6,16 @@ const Upload = () => {
   const [message, setMessage] = useState("");
 
   const handleUpload = async () => {
+    const videoData = JSON.parse(localStorage.getItem("VideoData"));
+
     setMessage("Uploading...");
     try {
-      const response = await axios.post("/api/Upload");
+      const response = await axios.post("/api/Upload", {
+        title: videoData.title,
+        description: videoData.description,
+        privacyStatus: videoData.privacyStatus,
+        url: videoData.url,
+      });
       setMessage(`✅ Video uploaded! Video ID: ${response.data.videoId}`);
     } catch (error) {
       setMessage(
