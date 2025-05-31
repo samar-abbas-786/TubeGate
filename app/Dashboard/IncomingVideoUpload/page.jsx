@@ -52,7 +52,7 @@ const IncomingVideoUpload = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-purple-300 p-6">
+    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 pt-24 text-purple-300 p-6">
       <h1 className="text-4xl font-bold mb-10 text-center text-purple-400 drop-shadow-lg">
         📥 Incoming Videos
       </h1>

@@ -20,7 +20,7 @@ const GetEditor = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white p-6 flex flex-col items-center">
+    <div className="min-h-screen bg-black text-white p-6 pt-20 flex flex-col items-center">
       <h2 className="text-3xl font-bold text-purple-400 mb-6">
         <span className="bg-gradient-to-r from-purple-500 to-purple-700 bg-clip-text text-transparent">
           Editor List

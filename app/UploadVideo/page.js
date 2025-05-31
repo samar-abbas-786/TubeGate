@@ -25,14 +25,19 @@ const Upload = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#0f0f0f] p-6">
+      <h1 className="text-2xl font-semibold text-violet-400 mb-6 animate-pulse">
+        Final Step Before Posting
+      </h1>
       <button
         onClick={handleUpload}
-        className="px-3 py-2 mt-5 rounded-sm bg-red-600 text-white text-lg font-bold"
+        className="px-6 py-3 bg-gradient-to-r from-purple-700 to-violet-500 hover:from-violet-600 hover:to-purple-600 transition-all duration-300 text-white font-bold rounded-lg shadow-lg"
       >
-        Upload video
+        Are you sure you want to post this on YouTube?
       </button>
-      {message && <p className="mt-4 text-center">{message}</p>}
+      {message && (
+        <p className="mt-6 text-center text-violet-300 text-lg">{message}</p>
+      )}
     </div>
   );
 };
