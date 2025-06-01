@@ -37,7 +37,7 @@ const GetEditor = () => {
     getUserList();
   }, []);
 
-  const filteredUsers = userlist.filter((user) =>
+  const filteredUsers = userlist?.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -200,9 +200,9 @@ const GetEditor = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <span className="text-white/80">
-              {filteredUsers.length === 1
+              {filteredUsers?.length === 1
                 ? "1 editor"
-                : `${filteredUsers.length} editors`}
+                : `${filteredUsers?.length} editors`}
               {searchTerm && ` matching "${searchTerm}"`}
             </span>
           </motion.div>
@@ -214,7 +214,7 @@ const GetEditor = () => {
             <LoadingSpinner />
           ) : error ? (
             <ErrorState />
-          ) : filteredUsers.length === 0 ? (
+          ) : filteredUsers?.length === 0 ? (
             <EmptyState />
           ) : (
             <motion.div
@@ -224,7 +224,7 @@ const GetEditor = () => {
               className="space-y-4"
             >
               <AnimatePresence>
-                {filteredUsers.map((user, index) => (
+                {filteredUsers?.map((user, index) => (
                   <motion.div
                     key={user.id}
                     variants={itemVariants}

@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const localuser = JSON.parse(localStorage.getItem("user"));
+    const localuser = JSON.parse(localStorage.getItem("user")) || null;
     if (localuser) setUser(localuser);
   }, []);
 

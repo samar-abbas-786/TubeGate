@@ -32,7 +32,7 @@ const Getuser = () => {
     getUserList();
   }, []);
 
-  const filteredUsers = userlist.filter((user) =>
+  const filteredUsers = userlist?.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -81,7 +81,7 @@ const Getuser = () => {
             <div className="flex items-center justify-center gap-8 mt-8 text-sm">
               <div className="flex items-center gap-2 text-purple-300">
                 <FiUser />
-                <span>{userlist.length} Total Users</span>
+                <span>{userlist?.length} Total Users</span>
               </div>
               <div className="flex items-center gap-2 text-purple-300">
                 <FiEye />
@@ -106,7 +106,7 @@ const Getuser = () => {
 
           {/* User Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-stagger-container">
-            {filteredUsers.map((user, index) => (
+            {filteredUsers?.map((user, index) => (
               <div
                 key={user.id || index}
                 className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl relative overflow-hidden group hover:border-purple-400/50 transition-all duration-500 animate-fade-in-up"
@@ -170,7 +170,7 @@ const Getuser = () => {
           </div>
 
           {/* Empty State */}
-          {filteredUsers.length === 0 && !loading && (
+          {filteredUsers?.length === 0 && !loading && (
             <div className="text-center py-12 animate-fade-in-up">
               <div className="w-20 h-20 bg-gradient-to-br from-gray-600/20 to-gray-800/20 rounded-full flex items-center justify-center mb-6 border border-gray-500/30 mx-auto">
                 <FiSearch size={32} className="text-gray-400" />
