@@ -163,7 +163,7 @@ const Hero = () => {
             Experience the future of content management with
             <span className="font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
               {" "}
-              AI-powered workflows
+              automation-powered workflows
             </span>
             ,
             <span className="font-bold bg-gradient-to-r from-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">
@@ -173,7 +173,7 @@ const Hero = () => {
             , and
             <span className="font-bold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
               {" "}
-              seamless YouTube integration
+              seamless YouTube integration with influencer authentication
             </span>
             .
           </p>
