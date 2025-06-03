@@ -31,9 +31,9 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
-  const user = await prisma.user.findMany();
+  const user = await prisma.user.findMany({});
   return NextResponse.json({
-    message: "new user created successfully",
+    message: " successfully",
     user,
   });
 }

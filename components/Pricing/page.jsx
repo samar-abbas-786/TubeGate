@@ -53,7 +53,7 @@ export default function Pricing() {
       </h2>
       <p className="text-gray-400 max-w-xl text-center mb-16">
         Whether you're just starting out or need enterprise-level tools,
-        Tubegate has a plan for you.
+        TubeGate has a plan for you.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl">

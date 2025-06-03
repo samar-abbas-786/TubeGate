@@ -13,7 +13,7 @@ export default function HowItWorks() {
       </div>
 
       <h2 className=" p-2 text-3xl sm:text-4xl md:text-[2.5rem] font-extrabold bg-gradient-to-r from-purple-400 to-white bg-clip-text text-transparent mb-10 text-center max-w-4xl">
-        How Tubegate Works
+        How TubeGate Works
       </h2>
       <p className="max-w-3xl text-center mb-16 text-base sm:text-lg text-gray-400">
         Upload, manage, and publish your YouTube videos with ease — using a
@@ -24,13 +24,13 @@ export default function HowItWorks() {
         <Step
           icon={<FaLock className="text-purple-400 w-14 h-14 mx-auto mb-5" />}
           title="Secure Authentication"
-          description="Sign in securely via Google OAuth to grant Tubegate permission to manage your channel without compromising your privacy."
+          description="Sign in securely via Google OAuth to grant TubeGate permission to manage your channel without compromising your privacy."
         />
 
         <Step
           icon={<FaUpload className="text-purple-400 w-14 h-14 mx-auto mb-5" />}
           title="Easy Video Upload"
-          description="Select your video, add a title and description, then upload directly to your YouTube channel — all from Tubegate's dashboard."
+          description="Select your video, add a title and description, then upload directly to your YouTube channel — all from TubeGate's dashboard."
         />
 
         <Step

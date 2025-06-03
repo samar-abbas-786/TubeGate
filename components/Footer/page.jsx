@@ -138,7 +138,7 @@ export default function Footer() {
       {/* Copyright section - improved */}
       <div className="border-t border-purple-900/30 mt-16 pt-8 text-sm text-center text-gray-500 flex flex-col md:flex-row justify-between items-center">
         <div className="mb-4 md:mb-0">
-          &copy; {new Date().getFullYear()} Tubegate. All rights reserved.
+          &copy; {new Date().getFullYear()} TubeGate. All rights reserved.
         </div>
         <div className="flex space-x-6">
           <a href="#" className="hover:text-purple-400 transition">
