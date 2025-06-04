@@ -40,7 +40,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-gray-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black text-gray-100 flex items-center justify-center p-4 pt-20">
       <div className="w-full max-w-md bg-black border border-purple-900/30 rounded-xl shadow-lg shadow-purple-900/20 p-8">
         {/* Header */}
         <div className="text-center mb-8">
