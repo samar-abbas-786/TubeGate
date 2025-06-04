@@ -38,7 +38,7 @@ const GetEditor = () => {
   }, []);
 
   const filteredUsers = userlist?.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    user?.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const containerVariants = {
@@ -226,7 +226,7 @@ const GetEditor = () => {
               <AnimatePresence>
                 {filteredUsers?.map((user, index) => (
                   <motion.div
-                    key={user.id}
+                    key={user?.id}
                     variants={itemVariants}
                     layout
                     initial={{ opacity: 0, y: 20 }}
@@ -234,7 +234,7 @@ const GetEditor = () => {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
-                    <Link href={`/Editor-List/${user.id}`}>
+                    <Link href={`/Editor-List/${user?.id}`}>
                       <motion.div
                         className="group relative w-full bg-gradient-to-r from-white/5 to-white/10 border border-white/10 rounded-2xl p-6 shadow-lg hover:shadow-purple-500/10 transition-all duration-300 backdrop-blur-sm overflow-hidden"
                         variants={cardVariants}
@@ -255,7 +255,7 @@ const GetEditor = () => {
                             {/* Editor Info */}
                             <div>
                               <h3 className="text-lg font-semibold text-white group-hover:text-purple-200 transition-colors duration-300">
-                                {user.name}
+                                {user?.name}
                               </h3>
                               <p className="text-white/60 text-sm">
                                 Video Editor
