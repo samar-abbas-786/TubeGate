@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+// import video from "../../public/TubeGate.mp4"
 
 const Hero = () => {
   const router = useRouter();
@@ -194,11 +195,14 @@ const Hero = () => {
             </button>
 
             <button className="group px-10 py-5 rounded-2xl bg-black/40 backdrop-blur-sm border-2 border-violet-500/30 text-violet-300 hover:text-white font-bold text-lg transition-all duration-300 hover:border-violet-500/60 hover:bg-violet-900/20">
-              <span className="flex items-center gap-3">
+              <Link
+                href="C:/Users/HP/OneDrive/Desktop/postify/public/TubeGate.mp4"
+                className="flex items-center gap-3"
+              >
                 <Play className="w-5 h-5 text-violet-400 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
                 Watch Demo
                 <div className="w-0 h-0.5 bg-violet-400 group-hover:w-8 transition-all duration-500" />
-              </span>
+              </Link>
             </button>
           </div>
 

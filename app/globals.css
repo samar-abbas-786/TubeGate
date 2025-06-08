@@ -59,7 +59,8 @@ html {
 .glitch {
   position: relative;
 }
-.glitch::before, .glitch::after {
+.glitch::before,
+.glitch::after {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -80,12 +81,24 @@ html {
 }
 
 @keyframes glitch-anim {
-  0% { clip: rect(62px, 9999px, 52px, 0) }
-  20% { clip: rect(33px, 9999px, 144px, 0) }
-  40% { clip: rect(121px, 9999px, 115px, 0) }
-  60% { clip: rect(144px, 9999px, 162px, 0) }
-  80% { clip: rect(62px, 9999px, 180px, 0) }
-  100% { clip: rect(88px, 9999px, 98px, 0) }
+  0% {
+    clip: rect(62px, 9999px, 52px, 0);
+  }
+  20% {
+    clip: rect(33px, 9999px, 144px, 0);
+  }
+  40% {
+    clip: rect(121px, 9999px, 115px, 0);
+  }
+  60% {
+    clip: rect(144px, 9999px, 162px, 0);
+  }
+  80% {
+    clip: rect(62px, 9999px, 180px, 0);
+  }
+  100% {
+    clip: rect(88px, 9999px, 98px, 0);
+  }
 }
 
 /* Cyber Button */
@@ -94,7 +107,7 @@ html {
   padding: 1.5rem 3rem;
   color: white;
   text-transform: uppercase;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   letter-spacing: 2px;
   overflow: hidden;
   border: 2px solid transparent;
