@@ -69,50 +69,57 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-gray-100 flex items-center justify-center p-4 pt-20">
+    <div className="min-h-screen bg-black text-gray-100 flex items-center justify-center p-4 pt-20 font-sans">
       {!user ? (
-        <div className="w-full max-w-md bg-black border border-purple-900/30 rounded-xl shadow-lg shadow-purple-900/20 p-8">
+        <div className="w-full max-w-md bg-black border border-purple-900/30 rounded-2xl shadow-xl shadow-purple-900/30 p-8">
+          {/* Header */}
           <div className="text-center mb-8">
             <FaUserPlus className="mx-auto text-purple-500 text-4xl mb-3" />
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
               Join TubeGate
             </h1>
-            <p className="text-gray-400 mt-2">Create your account</p>
+            <p className="text-gray-400 text-sm mt-1">
+              Create your account below
+            </p>
           </div>
 
-          {/* 🔐 Form-based Registration */}
-          <form className="space-y-4" onSubmit={handleRegistration}>
+          {/* Form */}
+          <form className="space-y-5" onSubmit={handleRegistration}>
             <div>
-              <label className="block text-gray-300 mb-2">Full Name</label>
+              <label className="block text-gray-300 text-sm mb-1">
+                Full Name
+              </label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full bg-black border border-purple-900/50 rounded-lg px-4 py-3"
-                placeholder="John Doe"
+                className="w-full bg-black border border-purple-800/40 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition"
+                placeholder="e.g. John Doe"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-gray-300 mb-2">Email</label>
+              <label className="block text-gray-300 text-sm mb-1">Email</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-black border border-purple-900/50 rounded-lg px-4 py-3"
+                className="w-full bg-black border border-purple-800/40 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition"
                 placeholder="you@example.com"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-gray-300 mb-2">Password</label>
+              <label className="block text-gray-300 text-sm mb-1">
+                Password
+              </label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-black border border-purple-900/50 rounded-lg px-4 py-3"
+                className="w-full bg-black border border-purple-800/40 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition"
                 placeholder="••••••••"
                 required
               />
@@ -120,24 +127,26 @@ const RegisterPage = () => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2 shadow-lg hover:shadow-purple-500/30 mt-6"
+              className="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-xl font-semibold tracking-wide hover:from-purple-700 hover:to-purple-900 transition-all shadow-lg hover:shadow-purple-500/30 flex items-center justify-center gap-2"
             >
               Register <FaArrowRight />
             </button>
           </form>
 
-          {/* 🌐 OAuth Login */}
+          {/* OAuth */}
           {!session?.user &&
             Object.values(providers).map((provider) => (
               <button
                 key={provider.id}
                 onClick={() => handleOAuth(provider.id)}
-                className="w-full bg-gradient-to-r py-3 rounded-lg font-medium border-[1px] border-white transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-purple-500/30 mt-6"
+                className="w-full mt-6 flex items-center justify-center gap-3 px-4 py-3 border border-white/20 rounded-xl text-sm font-medium bg-gradient-to-r from-white/5 to-white/10 hover:from-white/10 hover:to-white/20 transition-all shadow-md hover:shadow-purple-500/20"
               >
-                <FcGoogle size={30} /> Sign up with {provider.name}
+                <FcGoogle size={24} />
+                <span className="text-white">Sign up with {provider.name}</span>
               </button>
             ))}
 
+          {/* Already logged in */}
           {session?.user && (
             <div className="mt-4 text-center">
               <button
@@ -152,11 +161,11 @@ const RegisterPage = () => {
             </div>
           )}
 
-          <div className="mt-6 text-center text-gray-400">
+          <div className="mt-6 text-center text-gray-400 text-sm">
             Already have an account?{" "}
             <Link
               href="/Login"
-              className="text-purple-400 hover:text-purple-300 transition"
+              className="text-purple-400 hover:text-purple-300 font-medium transition"
             >
               Login here
             </Link>

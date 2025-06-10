@@ -6,6 +6,7 @@ const Upload = () => {
   const [message, setMessage] = useState("");
 
   const handleUpload = async () => {
+    
     const videoData = JSON.parse(localStorage.getItem("VideoData"));
 
     setMessage("Uploading...");
