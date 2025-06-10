@@ -1,3 +1,5 @@
+import { useAuth } from "context/authContext";
+
 const Editor = async ({ params }) => {
   const res = await fetch(
     `http://localhost:3000/api/USER/GetEditor/${params.id}`,
@@ -12,6 +14,7 @@ const Editor = async ({ params }) => {
 
   const data = await res.json();
   const user = data.editor;
+  const { role } = useAuth();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center px-4 py-10">
@@ -31,7 +34,7 @@ const Editor = async ({ params }) => {
         </a> */}
 
         <span className="inline-block mt-2 px-4 py-1 bg-purple-600 text-white rounded-full text-sm uppercase tracking-wider">
-          {user?.role}
+          {role}
         </span>
       </div>
     </div>

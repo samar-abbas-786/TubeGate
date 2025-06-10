@@ -5,13 +5,20 @@ export async function GET(request) {
   try {
     const alleditor = await prisma.user.findMany({
       where: {
-        role: "editor",
+        profession: {
+          some: {
+            role: "editor",
+          },
+        },
+      },
+      include: {
+        profession: true,
       },
     });
 
     let editor = [];
     alleditor.map((e) => {
-      let { password: _, ...user } = e;
+      let { profession: _,password, ...user } = e;
       editor.push(user);
     });
     return NextResponse.json({

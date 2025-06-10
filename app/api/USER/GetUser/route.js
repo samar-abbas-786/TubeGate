@@ -5,12 +5,23 @@ export async function GET(request) {
   try {
     const alluser = await prisma.user.findMany({
       where: {
-        role: "user",
+        profession: {
+          some: {
+            role: "user",
+          },
+        },
+      },
+      include: {
+        profession: true,
       },
     });
+
     let userlist = [];
+    if (alluser.length == 0) {
+      return NextResponse.json({ message: "No User Found" });
+    }
     alluser.map((e) => {
-      let { password: _, ...user } = e;
+      let { password: _, profession, ...user } = e;
       userlist.push(user);
     });
     return NextResponse.json({

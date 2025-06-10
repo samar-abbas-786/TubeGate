@@ -1,3 +1,5 @@
+import { useAuth } from "context/authContext";
+
 const User = async ({ params }) => {
   const res = await fetch(
     `http://localhost:3000/api/USER/GetUser/${params.id}`,
@@ -12,7 +14,7 @@ const User = async ({ params }) => {
 
   const data = await res.json();
   const user = data.user;
-
+  const { role } = useAuth();
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center px-4 py-10">
       <div className="bg-gray-800 border border-purple-600 rounded-2xl p-8 max-w-md w-full shadow-lg text-center space-y-6">
@@ -29,7 +31,7 @@ const User = async ({ params }) => {
 
         {/* Role */}
         <span className="inline-block mt-2 px-4 py-1 bg-purple-600 text-white rounded-full text-sm">
-          {user.role}
+          {role}
         </span>
       </div>
     </div>

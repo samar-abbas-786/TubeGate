@@ -2,7 +2,7 @@ import prisma from "DB/db.config";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { name, email, password, role } = await request.json();
+  const { name, email, password } = await request.json();
   console.log("registration", name);
   if (!name || !email || !password) {
     return NextResponse.json(
@@ -15,7 +15,6 @@ export async function POST(request) {
       data: {
         name,
         email,
-        role,
         password,
       },
     });

@@ -9,6 +9,9 @@ export async function POST(request) {
       where: {
         email: email,
       },
+      include: {
+        profession: true,
+      },
     });
 
     if (!isUser) {
@@ -24,6 +27,7 @@ export async function POST(request) {
         { status: 400 }
       );
     }
+
     const { password: _, ...user } = isUser;
 
     return NextResponse.json(

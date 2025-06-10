@@ -7,16 +7,38 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { useEffect } from "react";
+
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../../context/authContext";
+import { useSession, signIn, signOut, getProviders } from "next-auth/react";
 
 const LoginPage = () => {
+  const [providers, setProviders] = useState([]);
+
+  const { data: session } = useSession();
+  const handleOAuth = async (id) => {
+    signIn(id, { callbackUrl: "/" });
+  };
+  useEffect(() => {
+    const setUpProvider = async () => {
+      const response = await getProviders();
+      if (response) {
+        setProviders(response);
+      } else {
+        console.log("No providers");
+      }
+    };
+
+    setUpProvider();
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [role, setRole] = useState("user");
-  const { user, setUser } = useAuth();
+  const { user, setUser, role, setRole } = useAuth();
 
   const router = useRouter();
   const handleLogin = async () => {
@@ -27,12 +49,20 @@ const LoginPage = () => {
       });
 
       if (response.status === 200) {
-        console.log("user", response.data);
-        setUser(response.data.user);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        const loggedInUser = response.data.user;
+
+        console.log("user", loggedInUser);
+        setUser(loggedInUser);
+
+        const extractedRole = loggedInUser?.profession?.[0]?.role || "user";
+        setRole(extractedRole);
+
+        localStorage.setItem("user", JSON.stringify(loggedInUser));
+        localStorage.setItem("userRole", extractedRole);
 
         router.push("/");
       } else {
+        console.warn("Unexpected status:", response.status);
         router.push("/Login");
       }
     } catch (error) {
@@ -40,6 +70,7 @@ const LoginPage = () => {
       router.push("/Login");
     }
   };
+
   return (
     <div className="min-h-screen bg-black text-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-black border border-purple-900/30 rounded-xl shadow-lg shadow-purple-900/20 p-8">
@@ -82,6 +113,32 @@ const LoginPage = () => {
           >
             Login <FaArrowRight />
           </button>
+          {/* OAuth */}
+          {!session?.user &&
+            Object.values(providers).map((provider) => (
+              <button
+                key={provider.id}
+                onClick={() => handleOAuth(provider.id)}
+                className="w-full bg-gradient-to-r py-3 rounded-lg font-medium border-[1px] border-white transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-purple-500/30 mt-6"
+              >
+                <FcGoogle size={30} /> Sign up with {provider.name}
+              </button>
+            ))}
+
+          {session?.user && (
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => {
+                  localStorage.removeItem("user");
+                  localStorage.removeItem("userRole");
+                  signOut();
+                }}
+                className="text-purple-400 hover:text-purple-300 transition"
+              >
+                Sign out
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="mt-6 text-center text-gray-400">

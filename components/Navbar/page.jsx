@@ -7,12 +7,13 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/authContext";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { signOut } from "next-auth/react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
-  const { user, setUser } = useAuth();
+  const { user, setUser, role } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("userRole");
+    signOut();
     setUser(null);
     setIsOpen(false);
     router.push("/Login");
@@ -46,7 +49,7 @@ const Navbar = () => {
     ];
 
     const roleLinks =
-      user.role === "editor"
+      role === "editor"
         ? [
             {
               label: "My User",
